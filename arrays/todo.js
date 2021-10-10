@@ -1,11 +1,30 @@
-const todos = ["read book", "do yoga", "learn topic"];
+const todos = [
+  {
+    text: "read book",
+    completed: false,
+  },
+  {
+    text: "do yoga",
+    completed: true,
+  },
+  {
+    text: "learn topic",
+    completed: false,
+  },
+  {
+    text: "clean home",
+    completed: false,
+  },
+];
 
-todos.splice(1, 1);
-todos.push("Finish spanish lesson challenge");
-todos.shift();
+const deleteTodo = (todos, todoText) => {
+  const index = todos.findIndex((todo) => {
+    return todo.text.toLowerCase() === todoText.toLowerCase();
+  });
+  if (index > -1) {
+    todos.splice(index, 1);
+  }
+};
 
-console.log(`You have ${todos.length} todos!`);
-
-todos.forEach((item, index) => {
-  console.log(`${index + 1}. ${item}`);
-});
+deleteTodo(todos, "clean home");
+console.log(todos);

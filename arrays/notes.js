@@ -4,7 +4,7 @@ const notes = [
     body: "Spain",
   },
   {
-    title: "learning",
+    title: "learning plan",
     body: "full stack",
   },
   {
@@ -12,27 +12,19 @@ const notes = [
     body: "make a project",
   },
 ];
-// end
-// console.log(notes.pop());
-// notes.push("new note");
 
-// //start
-// console.log(notes.shift());
-// notes.unshift("first note");
+const findNote = (notes, noteTitle) => {
+  return notes.find((note) => {
+    return note.title.toLowerCase() === noteTitle.toLowerCase();
+  });
+};
 
-//notes.splice(1, 1, "This is the new second item");
+// const findNote = (notes, noteTitle) => {
+//   const index = notes.findIndex((note) => {
+//     return note.title.toLowerCase() === noteTitle.toLowerCase();
+//   });
+//   return notes[index];
+// };
 
-// notes[2] = "This is new note 3";
-
-// notes.forEach((item, index) => {
-//   console.log(index + 1, item);
-// });
-
-console.log(notes.length);
-console.log(notes);
-
-const index = notes.findIndex((note, index) => {
-  console.log(note);
-  return note.title === "learning";
-});
-console.log(index);
+const note = findNote(notes, "Learning plan");
+console.log(note);
