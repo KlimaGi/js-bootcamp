@@ -9,13 +9,25 @@ const todos = [
   },
   {
     text: "learn topic",
-    completed: false,
+    completed: true,
   },
   {
     text: "clean home",
     completed: false,
   },
 ];
+
+const sortTodos = (todos) => {
+  todos.sort((a, b) => {
+    if (!a.completed && b.completed) {
+      return -1;
+    } else if (!b.completed && a.completed) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+};
 
 const deleteTodo = (todos, todoText) => {
   const index = todos.findIndex((todo) => {
@@ -32,7 +44,10 @@ const getThingsToDo = (todos) => {
   });
 };
 
-console.log(getThingsToDo(todos));
+sortTodos(todos);
+console.log(todos);
+console.log(true > false);
+//console.log(getThingsToDo(todos));
 
 // deleteTodo(todos, "clean home");
 // console.log(todos);

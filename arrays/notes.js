@@ -13,6 +13,18 @@ const notes = [
   },
 ];
 
+const sortNotes = (notes) => {
+  notes.sort((a, b) => {
+    if (a.title.toLowerCase() < b.title.toLowerCase()) {
+      return -1;
+    } else if (b.title.toLowerCase() < a.title.toLowerCase()) {
+      return 1;
+    } else {
+      return 0;
+    }
+  });
+};
+
 const findNote = (notes, noteTitle) => {
   return notes.find((note) => {
     return note.title.toLowerCase() === noteTitle.toLowerCase();
@@ -31,14 +43,10 @@ const findNotes = (notes, query) => {
   });
 };
 
-console.log(findNotes(notes, "full"));
+// console.log(findNotes(notes, "full"));
 
-// const findNote = (notes, noteTitle) => {
-//   const index = notes.findIndex((note) => {
-//     return note.title.toLowerCase() === noteTitle.toLowerCase();
-//   });
-//   return notes[index];
-// };
+// const note = findNote(notes, "Learning plan");
+// console.log(note);
 
-const note = findNote(notes, "Learning plan");
-console.log(note);
+sortNotes(notes);
+console.log(notes);
