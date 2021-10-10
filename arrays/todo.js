@@ -26,5 +26,13 @@ const deleteTodo = (todos, todoText) => {
   }
 };
 
-deleteTodo(todos, "clean home");
-console.log(todos);
+const getThingsToDo = (todos) => {
+  return todos.filter((todo) => {
+    return !todo.completed;
+  });
+};
+
+console.log(getThingsToDo(todos));
+
+// deleteTodo(todos, "clean home");
+// console.log(todos);

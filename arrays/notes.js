@@ -19,6 +19,20 @@ const findNote = (notes, noteTitle) => {
   });
 };
 
+const findNotes = (notes, query) => {
+  return notes.filter((note, index) => {
+    const isTitleMatch = note.title
+      .toLocaleLowerCase()
+      .includes(query.toLocaleLowerCase());
+    const isBodyMatch = note.body
+      .toLocaleLowerCase()
+      .includes(query.toLocaleLowerCase());
+    return isTitleMatch || isBodyMatch;
+  });
+};
+
+console.log(findNotes(notes, "full"));
+
 // const findNote = (notes, noteTitle) => {
 //   const index = notes.findIndex((note) => {
 //     return note.title.toLowerCase() === noteTitle.toLowerCase();
