@@ -1,4 +1,4 @@
-const todos = [
+let todos = [
   {
     text: "read book",
     completed: false,
@@ -17,25 +17,43 @@ const todos = [
   },
 ];
 
-// You have 2 todos left
-// p tag for every todo
-const incompleteTodos = todos.filter((todo) => !todo.completed);
-const summary = document.createElement("h4");
-summary.textContent = `You have ${incompleteTodos.length} todos left`;
-document.querySelector("body").appendChild(summary);
+const filters = {
+  searchText: "",
+};
 
-todos.forEach((todo) => {
-  const p = document.createElement("p");
-  p.textContent = todo.text;
-  document.querySelector("body").appendChild(p);
+const renderTodos = (todos, filters) => {
+  const filteredTodos = todos.filter((todo) => {
+    return todo.text.toLowerCase().includes(filters.searchText.toLowerCase());
+  });
+
+  const incompleteTodos = filteredTodos.filter((todo) => !todo.completed);
+
+  document.querySelector("#todos").innerHTML = "";
+
+  const summary = document.createElement("h4");
+  summary.textContent = `You have ${incompleteTodos.length} todos left`;
+  document.querySelector("#todos").appendChild(summary);
+
+  filteredTodos.forEach((todo) => {
+    const p = document.createElement("p");
+    p.textContent = todo.text;
+    document.querySelector("#todos").appendChild(p);
+  });
+};
+
+renderTodos(todos, filters);
+
+document.querySelector("#search-text").addEventListener("input", (e) => {
+  filters.searchText = e.target.value;
+  renderTodos(todos, filters);
 });
 
-// Listen for new todo creation
-document.querySelector("#add-todo").addEventListener("click", () => {
-  console.log("Add new todo...");
-});
-
-// Listen for todo text change
-document.querySelector("#input-todo").addEventListener("input", (e) => {
-  console.log(e.target.value);
+document.querySelector("#new-todo").addEventListener("submit", (e) => {
+  e.preventDefault();
+  todos.push({
+    text: e.target.elements.todoText.value,
+    completed: false,
+  });
+  renderTodos(todos, filters);
+  e.target.elements.todoText.value = "";
 });
