@@ -9,13 +9,15 @@
     <h4>Take notes and never forget</h4>
     <input id="search-text" type="text" placeholder="Filter notes">
     
+    <select id="filter-by">
+      <option value="byEdited">Sort by last edited</option>
+      <option value="byCreated">Sort by recently created</option>
+      <option value="alphabetical">Sort alphabetically</option>
+    </select>
+
     <div id='notes'></div>
     <button id="create-note">Create note</button>
-    <label>
-      <input id="for-fun" type="checkbox"> Check me for fun
-    </label>
     
-
     <script src="notes-app.js" ></script>
   </body>
 </html>
