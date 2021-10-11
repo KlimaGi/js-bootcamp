@@ -13,20 +13,16 @@ const notes = [
   },
 ];
 
-// Query and remove
-// const p = document.querySelector("p");
-// p.remove();
-
-// Query all and remove
-const ps = document.querySelectorAll("p");
-
-ps.forEach((p) => {
-  p.textContent = "******";
-  // console.log(p.textContent)
-  // p.remove();
+document.querySelector("#create-note").addEventListener("click", (e) => {
+  e.target.textContent = "The button was clicked";
 });
 
-// Add a new element
-const newParagraph = document.createElement("p");
-newParagraph.textContent = "This is a new element from JS";
-document.querySelector("body").appendChild(newParagraph);
+document.querySelector("#remove-all").addEventListener("click", () => {
+  document.querySelectorAll(".note").forEach((note) => {
+    note.remove();
+  });
+});
+
+document.querySelector("#search-text").addEventListener("input", (e) => {
+  console.log(e.target.value);
+});
