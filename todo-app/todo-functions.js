@@ -20,6 +20,7 @@ const renderTodos = (todos, filters) => {
       .toLowerCase()
       .includes(filters.searchText.toLowerCase());
     const hideCompletedMatch = !filters.hideCompleted || !todo.completed;
+
     return searchTextMatch && hideCompletedMatch;
   });
 
@@ -38,9 +39,24 @@ const renderTodos = (todos, filters) => {
 
 // Get the DOM elements for an individual todo
 const generateTodoDOM = (todo) => {
-  const p = document.createElement("p");
-  p.textContent = todo.text;
-  return p;
+  const todoEl = document.createElement("div");
+  const checkEl = document.createElement("input");
+  const textEl = document.createElement("span");
+  const xButton = document.createElement("button");
+
+  // setup todo checkbox
+  checkEl.setAttribute("type", "checkbox");
+  todoEl.appendChild(checkEl);
+
+  // setup the todo text
+  textEl.textContent = todo.text;
+  todoEl.appendChild(textEl);
+
+  // setup the remove button
+  xButton.textContent = "x";
+  todoEl.appendChild(xButton);
+
+  return todoEl;
 };
 
 // Get the DOM elements for list summary
