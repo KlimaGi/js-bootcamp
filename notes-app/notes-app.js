@@ -1,40 +1,14 @@
-const notes = [
-  {
-    title: "trip",
-    body: "Spain",
-  },
-  {
-    title: "learning plan",
-    body: "full stack",
-  },
-  {
-    title: "work plans",
-    body: "make a project",
-  },
-];
+let notes = [];
 
 const filters = {
   searchText: "",
 };
 
-//create, update
-//localStorage.setItem("location", "Vilnius");
-//read
-//console.log(localStorage.getItem("location"));
-//delete
-//localStorage.removeItem("location");
-//localStorage.clear();
-
-// const user = {
-//   name: "Gi",
-//   age: 31,
-// };
-// const userJSON = JSON.stringify(user);
-// console.log(userJSON);
-// localStorage.setItem("user", userJSON);
-const userJSON = localStorage.getItem("user");
-const user = JSON.parse(userJSON);
-console.log(`${user.name} is ${user.age}`);
+// check for exsisting saved data
+const notesJSON = localStorage.getItem("notes");
+if (notesJSON !== null) {
+  notes = JSON.parse(notesJSON);
+}
 
 const renderNotes = (notes, filters) => {
   const filteredNotes = notes.filter((note) => {
@@ -45,7 +19,13 @@ const renderNotes = (notes, filters) => {
 
   filteredNotes.forEach((note) => {
     const noteEl = document.createElement("p");
-    noteEl.textContent = note.title;
+
+    if (note.title.length > 0) {
+      noteEl.textContent = note.title;
+    } else {
+      noteEl.textContent = "Unnamed note";
+    }
+
     document.querySelector("#notes").appendChild(noteEl);
   });
 };
@@ -53,7 +33,12 @@ const renderNotes = (notes, filters) => {
 renderNotes(notes, filters);
 
 document.querySelector("#create-note").addEventListener("click", (e) => {
-  e.target.textContent = "The button was clicked";
+  notes.push({
+    title: "",
+    body: "",
+  });
+  localStorage.setItem("notes", JSON.stringify(notes));
+  renderNotes(notes, filters);
 });
 
 document.querySelector("#search-text").addEventListener("input", (e) => {
