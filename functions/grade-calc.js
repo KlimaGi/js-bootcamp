@@ -1,4 +1,7 @@
 const gradeCalc = (score, totalScore) => {
+  if (typeof score !== "number" || typeof totalScore !== "number") {
+    throw Error("Please provide numbers only");
+  }
   const percent = (score / totalScore) * 100;
   let letter = "";
   if (percent >= 90) {
@@ -16,5 +19,9 @@ const gradeCalc = (score, totalScore) => {
   return `${score}/${totalScore} -> You got a ${letter} (${percent}%)!`;
 };
 
-const text = gradeCalc(15, 20);
-console.log(text);
+try {
+  const text = gradeCalc(16, 20);
+  console.log(text);
+} catch (e) {
+  console.log(e.message);
+}
