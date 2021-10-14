@@ -37,7 +37,7 @@ removeEl.addEventListener("click", () => {
 window.addEventListener("storage", (e) => {
   if (e.key === "notes") {
     notes = JSON.parse(e.newValue);
-    let note = notes.find((note) => note.id === noteId);
+    note = notes.find((note) => note.id === noteId);
 
     if (note === undefined) {
       location.assign("/index.html");
