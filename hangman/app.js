@@ -1,12 +1,9 @@
 const puzzleEl = document.querySelector("#puzzle");
 const guessNumEl = document.querySelector("#guess-num");
-const statusEl = document.querySelector("#status");
 const game1 = new Hangman("chess", 4);
 
 puzzleEl.textContent = game1.getPuzzle();
-guessNumEl.textContent = game1.guessNum;
-console.log(game1.status);
-//statusEl.textContent = "playing";
+guessNumEl.textContent = game1.getStatusMessage();
 
 window.addEventListener("keypress", (e) => {
   const guess = String.fromCharCode(e.charCode);
@@ -14,6 +11,5 @@ window.addEventListener("keypress", (e) => {
 
   puzzleEl.textContent = game1.getPuzzle();
   guessNumEl.textContent = game1.guessNum;
-  console.log(game1.status);
-  //statusEl.textContent = game1.status();
+  guessNumEl.textContent = game1.getStatusMessage();
 });

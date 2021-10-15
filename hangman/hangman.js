@@ -9,20 +9,6 @@ Hangman.prototype.calculateStatus = function () {
   const finished = this.word.every((letter) =>
     this.guessedLetters.includes(letter)
   );
-  // 1 approach
-  // const lettersUnguessed = this.word.filter((letter) => {
-  //   return !this.guessedLetters.includes(letter);
-  // });
-  // const finished = lettersUnguessed.length === 0;
-
-  // 2 approach
-  // let finished = true;
-  // this.word.forEach((letter) => {
-  //   if (this.guessedLetters.includes(letter)) {
-  //   } else {
-  //     finished = false;
-  //   }
-  // });
 
   if (this.guessNum === 0) {
     this.status = "failed";
@@ -47,10 +33,25 @@ Hangman.prototype.getPuzzle = function () {
   return puzzle;
 };
 
+Hangman.prototype.getStatusMessage = function () {
+  if (this.status === "playing") {
+    return `Guesses left: ${this.guessNum}`;
+  } else if (this.status === "failed") {
+    return `Nice try! The word was "${this.word.join("")}".`;
+  } else {
+    return "Great work! You guessed the work.";
+  }
+};
+
 Hangman.prototype.makeGuess = function (guess) {
   guess = guess.toLowerCase();
   const isUnique = !this.guessedLetters.includes(guess);
   const isBadGuess = !this.word.includes(guess);
+
+  // Disable new guess unless 'playing'
+  if (this.status !== "playing") {
+    return;
+  }
 
   if (isUnique) {
     this.guessedLetters.push(guess);
