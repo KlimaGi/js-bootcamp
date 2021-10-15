@@ -2,6 +2,35 @@ const Hangman = function (word, guessNum) {
   this.word = word.toLowerCase().split("");
   this.guessNum = guessNum;
   this.guessedLetters = [];
+  this.status = "playing";
+};
+
+Hangman.prototype.calculateStatus = function () {
+  const finished = this.word.every((letter) =>
+    this.guessedLetters.includes(letter)
+  );
+  // 1 approach
+  // const lettersUnguessed = this.word.filter((letter) => {
+  //   return !this.guessedLetters.includes(letter);
+  // });
+  // const finished = lettersUnguessed.length === 0;
+
+  // 2 approach
+  // let finished = true;
+  // this.word.forEach((letter) => {
+  //   if (this.guessedLetters.includes(letter)) {
+  //   } else {
+  //     finished = false;
+  //   }
+  // });
+
+  if (this.guessNum === 0) {
+    this.status = "failed";
+  } else if (finished) {
+    this.status = "finished";
+  } else {
+    this.status = "playing";
+  }
 };
 
 Hangman.prototype.getPuzzle = function () {
@@ -30,16 +59,6 @@ Hangman.prototype.makeGuess = function (guess) {
   if (isUnique && isBadGuess) {
     this.guessNum--;
   }
+
+  this.calculateStatus();
 };
-
-const game1 = new Hangman("chess", 4);
-
-console.log(game1.getPuzzle());
-console.log(game1.guessNum);
-
-window.addEventListener("keypress", (e) => {
-  const guess = String.fromCharCode(e.charCode);
-  game1.makeGuess(guess);
-  console.log(game1.getPuzzle());
-  console.log(game1.guessNum);
-});
