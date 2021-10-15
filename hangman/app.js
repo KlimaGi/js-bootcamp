@@ -14,7 +14,7 @@ window.addEventListener("keypress", (e) => {
   guessNumEl.textContent = game1.statusMessage;
 });
 
-getPuzzle((error, puzzle) => {
+getPuzzle("2", (error, puzzle) => {
   if (error) {
     console.log(`Error: ${error}`);
   } else {
@@ -22,23 +22,10 @@ getPuzzle((error, puzzle) => {
   }
 });
 
-// Making an HTTP request
-
-// const countryCode = "MX";
-// const countryRequest = new XMLHttpRequest();
-
-// countryRequest.addEventListener("readystatechange", (e) => {
-//   if (e.target.readyState === 4 && e.target.status === 200) {
-//     const data = JSON.parse(e.target.responseText);
-//     const country = data.find((country) => country.alpha2Code === countryCode);
-//     console.log(country.name);
-//   } else if (e.target.readyState === 4) {
-//     console.log("Unable to fetch data");
-//   }
-// });
-
-// countryRequest.open(
-//   "GET",
-//   "http://api.countrylayer.com/v2/all?access_key=90ced09cfc89936b70bfedf2ec75789b"
-// );
-// countryRequest.send();
+getCountry("MX", (error, country) => {
+  if (error) {
+    console.log(`Error: ${error}`);
+  } else {
+    console.log(`Country name: ${country.name}`);
+  }
+});
