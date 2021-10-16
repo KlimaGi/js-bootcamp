@@ -2,7 +2,6 @@
 const getCallback = (callback) => {
   setTimeout(() => {
     callback("This is my callback error", undefined);
-    callback("This is my callback error", undefined);
   }, 2000);
 };
 
@@ -15,13 +14,16 @@ getCallback((err, data) => {
 });
 
 // Promise
-const myPromise = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    //resolve("This is the promise data");
-    reject("This is promise error");
-    reject("This is promise error");
-  }, 2000);
-});
+
+const getDataPromise = (data) =>
+  new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(`This is my success data: ${data}`);
+      // reject("This is promise error");
+    }, 2000);
+  });
+
+const myPromise = getDataPromise(123);
 
 myPromise.then(
   (data) => {
