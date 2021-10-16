@@ -27,6 +27,18 @@ const getCountry = (countryCode) => {
       const country = data.find(
         (country) => country.alpha2Code === countryCode
       );
-      return country.name;
+      return country;
     });
+};
+
+const getLocation = () => {
+  return fetch("https://ipinfo.io/json?token=5f0c0945dc4c21").then(
+    (response) => {
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        throw new Error("Unable to fetch location");
+      }
+    }
+  );
 };

@@ -22,9 +22,12 @@ getPuzzle("2")
     console.log(`Error: ${err}`);
   });
 
-getCountry("LT")
+getLocation()
+  .then((data) => {
+    return getCountry(data.country);
+  })
   .then((country) => {
-    console.log(country);
+    console.log(country.name);
   })
   .catch((err) => {
     console.log(`Error: ${err}`);
