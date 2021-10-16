@@ -24,7 +24,6 @@ getDataCallback(2, (err, data) => {
 });
 
 // Promise
-
 const getDataPromise = (num) =>
   new Promise((resolve, reject) => {
     setTimeout(() => {
