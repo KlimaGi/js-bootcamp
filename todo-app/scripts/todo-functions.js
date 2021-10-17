@@ -34,6 +34,7 @@ const toggleTodo = (id) => {
 
 // Render application todos based on filters
 const renderTodos = (todos, filters) => {
+  const todoEl = document.querySelector("#todos");
   const filteredTodos = todos.filter((todo) => {
     const searchTextMatch = todo.text
       .toLowerCase()
@@ -45,20 +46,28 @@ const renderTodos = (todos, filters) => {
 
   const incompleteTodos = filteredTodos.filter((todo) => !todo.completed);
 
-  document.querySelector("#todos").innerHTML = "";
+  todoEl.innerHTML = "";
 
   const summaryDOM = generateSummaryDOM(incompleteTodos);
-  document.querySelector("#todos").appendChild(summaryDOM);
+  todoEl.appendChild(summaryDOM);
 
-  filteredTodos.forEach((todo) => {
-    const todoItem = generateTodoDOM(todo);
-    document.querySelector("#todos").appendChild(todoItem);
-  });
+  if (filteredTodos.length > 0) {
+    filteredTodos.forEach((todo) => {
+      const todoItem = generateTodoDOM(todo);
+      todoEl.appendChild(todoItem);
+    });
+  } else {
+    const emptyMessage = document.createElement("p");
+    emptyMessage.classList.add("empty-message");
+    emptyMessage.textContent = "No to-dos to show";
+    todoEl.appendChild(emptyMessage);
+  }
 };
 
 // Get the DOM elements for an individual todo
 const generateTodoDOM = (todo) => {
-  const todoEl = document.createElement("div");
+  const todoEl = document.createElement("label");
+  const containerEl = document.createElement("div");
   const checkEl = document.createElement("input");
   const textEl = document.createElement("span");
   const removeButton = document.createElement("button");
@@ -66,19 +75,25 @@ const generateTodoDOM = (todo) => {
   // setup todo checkbox
   checkEl.setAttribute("type", "checkbox");
   checkEl.checked = todo.completed;
-  todoEl.appendChild(checkEl);
+  containerEl.appendChild(checkEl);
   checkEl.addEventListener("change", () => {
     toggleTodo(todo.id);
     saveTodos(todos);
     renderTodos(todos, filters);
   });
 
-  // setup the todo text
+  // Setup the todo text
   textEl.textContent = todo.text;
-  todoEl.appendChild(textEl);
+  containerEl.appendChild(textEl);
 
-  // setup the remove button
-  removeButton.textContent = "x";
+  // Setup container
+  todoEl.classList.add("list-item");
+  containerEl.classList.add("list-item__container");
+  todoEl.appendChild(containerEl);
+
+  // Setup the remove button
+  removeButton.textContent = "remove";
+  removeButton.classList.add("button", "button--text");
   todoEl.appendChild(removeButton);
   removeButton.addEventListener("click", () => {
     removeTodo(todo.id);
@@ -92,6 +107,8 @@ const generateTodoDOM = (todo) => {
 // Get the DOM elements for list summary
 const generateSummaryDOM = (incompleteTodos) => {
   const summary = document.createElement("h4");
-  summary.textContent = `You have ${incompleteTodos.length} todos left`;
+  summary.classList.add("list-title");
+  const plural = incompleteTodos.length === 1 ? "" : "s";
+  summary.textContent = `You have ${incompleteTodos.length} todo${plural} left`;
   return summary;
 };
