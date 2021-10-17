@@ -2,27 +2,37 @@
 
 <html>
   <head>
-  
+      <link href="styles/styles.css" rel="stylesheet">
+      <link href="images/icon.png" rel="icon">
   </head>
   <body>
-    <h3>Notes App</h3>
-    <h4>Take notes and never forget</h4>
-    <input id="search-text" type="text" placeholder="Filter notes">
-    
-    <select id="filter-by">
-      <option value="byEdited">Sort by last edited</option>
-      <option value="byCreated">Sort by recently created</option>
-      <option value="alphabetical">Sort alphabetically</option>
-    </select>
+      <header class="header">
+            <div class="container">
+                <h1 class="header__title">Notes App</h1>
+                <p cass="header__subtitle">Take notes and never forget</p>
+            </div>
+      </header>
+
+      <div class="actions">
+          <div class="actions__container">
+              <input id="search-text" type="text" class="input" placeholder="Filter notes">
+                
+              <select id="filter-by" class="dropdown">
+                  <option value="byEdited">Sort by last edited</option>
+                  <option value="byCreated">Sort by recently created</option>
+                  <option value="alphabetical">Sort alphabetically</option>
+              </select>
+          </div>
+      </div>
 
     <div id='notes'></div>
     <button id="create-note">Create note</button>
     
     
-    <script src="uuidv4.js"></script>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="notes-functions.js"></script>
-    <script src="notes-app.js" ></script>
+    <script src="scripts/uuidv4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js" integrity="sha512-LGXaggshOkD/at6PFNcp2V2unf9LzFq6LE+sChH7ceMTDP0g2kn6Vxwgg7wkPP7AAtX+lmPqPdxB47A0Nz0cMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="scripts/notes-functions.js"></script>
+    <script src="scripts/notes-app.js" ></script>
     
   </body>
 </html>
