@@ -9,8 +9,14 @@ window.addEventListener("keypress", (e) => {
 });
 
 const render = () => {
-  puzzleEl.textContent = game1.puzzle;
+  puzzleEl.innerHTML = "";
   guessNumEl.textContent = game1.statusMessage;
+
+  game1.puzzle.split("").forEach((letter) => {
+    const letterEl = document.createElement("span");
+    letterEl.textContent = letter;
+    puzzleEl.appendChild(letterEl);
+  });
 };
 
 const startGame = async () => {
@@ -22,19 +28,3 @@ const startGame = async () => {
 document.querySelector("#reset").addEventListener("click", startGame);
 
 startGame();
-
-// getPuzzle("2")
-//   .then((puzzle) => {
-//     console.log(puzzle);
-//   })
-//   .catch((err) => {
-//     console.log(`Error: ${err}`);
-//   });
-
-// getCurrentCountry()
-//   .then((country) => {
-//     console.log(country.name);
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   });
