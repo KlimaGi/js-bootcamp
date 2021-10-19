@@ -1,11 +1,9 @@
-const name = "Mike";
-console.log(name);
+import otherSquare, { add, name } from "./utilities";
+import otherScream from "./scream";
 
-class Hangman {
-  myMethod() {
-    return "Testing";
-  }
-}
+console.log("index.js");
 
-const hangman = new Hangman();
-console.log(hangman.myMethod());
+console.log(add(32, 1));
+
+console.log(otherScream(name));
+console.log(otherSquare(7));
