@@ -1,5 +1,37 @@
-import { getTodos, createTodo, removeTodo, toggleTodo } from "./todos";
+import { renderTodos } from "./views";
+import { setFilters } from "./filters";
+import { createTodo, loadTodos } from "./todos";
 
-console.log(getTodos());
-removeTodo("20fb1fa1-b4b1-45e7-8a31-741e65c429c9");
-console.log(getTodos());
+renderTodos();
+
+document.querySelector("#search-text").addEventListener("input", (e) => {
+  setFilters({
+    searchText: e.target.value,
+  });
+  renderTodos();
+});
+
+document.querySelector("#new-todo").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const text = e.target.elements.todoText.value.trim();
+
+  if (text.length > 0) {
+    createTodo(text);
+    renderTodos();
+    e.target.elements.todoText.value = "";
+  }
+});
+
+document.querySelector("#hide-completed").addEventListener("change", (e) => {
+  setFilters({
+    hideCompleted: e.target.checked,
+  });
+  renderTodos();
+});
+
+window.addEventListener("storage", (e) => {
+  if (e.key === "todos") {
+    loadTodos();
+    renderTodos();
+  }
+});
