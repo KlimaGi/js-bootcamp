@@ -26,3 +26,32 @@ let cities = ["Barcelona", "Cape Town", "Bordeaux"];
 cities = [...cities, "Amsterdam"];
 
 console.log(cities);
+
+let house = {
+  bedrooms: 2,
+  bathrooms: 1.5,
+  yearBuilt: 2017,
+};
+
+let newHouse = {
+  basement: true,
+  ...house,
+  bedrooms: 3,
+};
+newHouse.yearBuilt = 2018;
+console.log(house);
+console.log(newHouse);
+
+const person = {
+  name: "Gi",
+  age: 31,
+};
+const location = {
+  city: "Vilnius",
+  country: "LT",
+};
+const overview = {
+  ...person,
+  ...location,
+};
+console.log(overview);
